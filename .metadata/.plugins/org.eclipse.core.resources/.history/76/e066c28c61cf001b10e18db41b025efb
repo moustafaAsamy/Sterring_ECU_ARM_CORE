@@ -1,0 +1,4 @@
+
+
+extern void ecoder_init(void);
+extern int ecoder_read(void);

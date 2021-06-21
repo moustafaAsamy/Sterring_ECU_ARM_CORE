@@ -1,0 +1,5 @@
+
+#define right_max 1600
+#define left_max  -1600
+extern void ecoder_init(void);
+extern int ecoder_read(void);
