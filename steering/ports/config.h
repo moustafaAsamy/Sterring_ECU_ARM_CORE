@@ -14,7 +14,7 @@
 #define ECU1 0
 #define ECU2 1
 
-#define  systic_rate  160000      // 10 ms
+#define  systic_rate  16000      // 10 ms
 extern struct netif netIf_List[5];
 extern const uint8_t mac[6] ;
 //

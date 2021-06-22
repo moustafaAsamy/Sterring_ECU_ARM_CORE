@@ -59,7 +59,7 @@ void SysTickIntHandler(void)
         if (main_function >= 10 )
             {
                 main_function =0;
-                task_t();
+               // task_t();
                 //task2();
                 //send_udp(buffer,4);
                // TcpIp_MainFunction();
@@ -67,7 +67,7 @@ void SysTickIntHandler(void)
             if ((leds_timer == 300  ) || (leds_timer > 300  ))
                 {
                 leds_timer=0;
-                //led_off();
+                 led_off();
                // set__point = set__point +250;
                 }
 

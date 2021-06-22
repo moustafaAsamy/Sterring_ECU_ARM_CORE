@@ -20,6 +20,8 @@ ports/buttons.obj: D:/arl/steering//\ ecu/steering/inc/hw_memmap.h
 ports/buttons.obj: D:/arl/steering//\ ecu/steering/driverlib/pin_map.h
 ports/buttons.obj: D:/arl/steering//\ ecu/steering/inc/hw_gpio.h
 ports/buttons.obj: D:/arl/steering//\ ecu/steering/inc/hw_ints.h
+ports/buttons.obj: ../ports/led.h
+ports/buttons.obj: D:/arl/steering//\ ecu/steering/driverlib/sysctl.h
 
 ../ports/buttons.c: 
 C:/ti/ccs900/ccs/tools/compiler/ti-cgt-arm_18.12.1.LTS/include/stdint.h: 
@@ -41,3 +43,5 @@ D:/arl/steering//\ ecu/steering/inc/hw_memmap.h:
 D:/arl/steering//\ ecu/steering/driverlib/pin_map.h: 
 D:/arl/steering//\ ecu/steering/inc/hw_gpio.h: 
 D:/arl/steering//\ ecu/steering/inc/hw_ints.h: 
+../ports/led.h: 
+D:/arl/steering//\ ecu/steering/driverlib/sysctl.h: 

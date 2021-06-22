@@ -12,6 +12,9 @@ main.obj: C:/ti/ccs900/ccs/tools/compiler/ti-cgt-arm_18.12.1.LTS/include/machine
 main.obj: C:/ti/ccs900/ccs/tools/compiler/ti-cgt-arm_18.12.1.LTS/include/sys/_stdint.h
 main.obj: ../pid.h
 main.obj: ../encoder.h
+main.obj: ../ADC.h
+main.obj: ../driverlib/sysctl.h
+main.obj: C:/ti/ccs900/ccs/tools/compiler/ti-cgt-arm_18.12.1.LTS/include/stdbool.h
 
 ../main.c: 
 ../motor.h: 
@@ -25,3 +28,6 @@ C:/ti/ccs900/ccs/tools/compiler/ti-cgt-arm_18.12.1.LTS/include/machine/_stdint.h
 C:/ti/ccs900/ccs/tools/compiler/ti-cgt-arm_18.12.1.LTS/include/sys/_stdint.h: 
 ../pid.h: 
 ../encoder.h: 
+../ADC.h: 
+../driverlib/sysctl.h: 
+C:/ti/ccs900/ccs/tools/compiler/ti-cgt-arm_18.12.1.LTS/include/stdbool.h: 

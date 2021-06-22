@@ -9,8 +9,8 @@
 #include "stdint.h"
 
 /* constants for PID */
-const float Kp = 5;
-const float Ki = 0.047;
+const float Kp = 6;
+const float Ki = 0.051;
 const float Kd = 0.5;
 const int Set_Point = 353;
 
@@ -94,9 +94,9 @@ derivative =error - last_error ;
 int pwm =(Kp*error) + (Ki*integral) + (Kd*derivative);
 
 
-if(pwm >1590)
-{pwm =1590;}
-else if (pwm <-1590) {pwm =-1590;}
+if(pwm >990)
+{pwm =990;}
+else if (pwm <-990) {pwm =-990;}
 
 last_error =error ;
 return pwm ;

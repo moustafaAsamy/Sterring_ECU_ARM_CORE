@@ -17,7 +17,8 @@
 #include "driverlib/pin_map.h"
 #include "inc/hw_gpio.h"
 #include "inc/hw_ints.h"
-
+#include "led.h"
+#include "driverlib/sysctl.h"
 
 #define BUTTONS_GPIO_PERIPH     SYSCTL_PERIPH_GPIOF
 #define BUTTONS_GPIO_BASE       GPIO_PORTF_BASE
@@ -27,14 +28,15 @@
 #define ALL_BUTTONS             (LEFT_BUTTON)
 
  uint8_t g_ui8ButtonStates = ALL_BUTTONS;
-
-
+ extern void task_set_point_change(void);
+ volatile uint8_t right =0;
 extern void ButtonsInit(void)
 {
 
     //
     // Set each of the button GPIO pins as an input with a pull-up.
     //
+    MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
     GPIODirModeSet(BUTTONS_GPIO_BASE, ALL_BUTTONS, GPIO_DIR_MODE_IN);
     MAP_GPIOPadConfigSet(BUTTONS_GPIO_BASE, ALL_BUTTONS, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD_WPU);
     MAP_IntEnable(46);
@@ -51,7 +53,16 @@ extern void buttons_handler(void)
     GPIOIntClear(GPIO_PORTF_BASE, pin_mask);
     MAP_GPIOPinWrite(GPIO_PORTF_BASE,8, 8);
    // TcpIp_Close(0, 0);
-
+    led_on(green);
+    task_set_point_change();
+    if (right ==1)
+        {
+        right =0;
+        }
+    else
+    {
+        right =1 ;
+    }
 }
 
 

@@ -5,7 +5,7 @@
    <string>defaultSolution</string>
    <void method="set">
     <object idref="SolutionManager$PersistState0"/>
-    <string>D:\arl\steering ecu\dvt\AnalysisSolutionsTemp\AnalysisSolution1624181110342\null</string>
+    <string>D:\arl\steering ecu\dvt\AnalysisSolutionsTemp\AnalysisSolution1624267638689\null</string>
    </void>
   </void>
  </object>
@@ -17,13 +17,7 @@
    <string>C:\ti\ccs900\ccs\ccs_base\dvt_4.1.0.201902061603\CodeGen\solutions\CodeGenCoverage</string>
   </void>
   <void method="add">
-   <string>C:\ti\ccs900\ccs\ccs_base\dvt_4.1.0.201902061603\CCSgraphs\solutions\SingleTime\singletime</string>
-  </void>
-  <void method="add">
-   <string>C:\ti\ccs900\ccs\ccs_base\dvt_4.1.0.201902061603\CCSgraphs\solutions\SingleTime\singletime</string>
-  </void>
-  <void method="add">
-   <string>D:\arl\steering ecu\dvt\AnalysisSolutionsTemp\AnalysisSolution1624181110342\null</string>
+   <string>D:\arl\steering ecu\dvt\AnalysisSolutionsTemp\AnalysisSolution1624267638689\null</string>
   </void>
  </void>
 </void>

@@ -23,5 +23,5 @@
 #define all     4|8|2
 void led_off(void);
 void led_on (uint8_t led);
-
+void led_init(void);
 #endif /* LED_H_ */
