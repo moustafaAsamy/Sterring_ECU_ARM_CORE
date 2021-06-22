@@ -59,7 +59,7 @@ void SysTickIntHandler(void)
         if (main_function >= 10 )
             {
                 main_function =0;
-               // task_t();
+                 task_t();
                 //task2();
                 //send_udp(buffer,4);
                // TcpIp_MainFunction();

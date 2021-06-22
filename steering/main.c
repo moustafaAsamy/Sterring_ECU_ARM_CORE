@@ -20,6 +20,7 @@ extern void ButtonsInit(void);
 void led_init(void);
 uint16_t percentage_change(uint8_t input);
 uint16_t change(uint16_t input);
+volatile uint8_t stop_flag =0;
 int c =0;
 int main()
 {
@@ -37,8 +38,8 @@ int main()
     {
 
     }
-    set__point =1;
-    //timer_start();
+    set__point =400;
+    timer_start();
      // Turn_Left(0); //CWW
     //Turn_Right(15000);//CW
 //    int c =change(set__point);
@@ -46,25 +47,33 @@ int main()
     while(1)
     {
         //Turn_Right(  (1000-  control_action)   );
-        get_ratio =ADC_get();
-        if(get_ratio >0)
-        {
 
-           c= percentage_change(get_ratio);
-            Turn_Left(c);
-        }
-        else
-        {
-             c= percentage_change(-get_ratio);
-             Turn_Right(c);
-             //Turn_Right(get_ratio);
-        }
-       // Turn_Left(1000-(get_ratio*10));
-         SysCtlDelay(SysCtlClockGet() / 12);
-       // Turn_Right(set__point);
-//          c =percentage_change(set__point);
-//        Turn_Right(c);
-    }
+//        get_ratio =ADC_get();
+//        if (stop_flag== 1)
+//        {
+//            stop_flag = 0;
+//             motor_stop();
+//            SysCtlDelay(SysCtlClockGet() / 12);
+//        }
+//        if(get_ratio >0)
+//        {
+//
+//           c= percentage_change(get_ratio);
+//            Turn_Left(c);
+//        }
+//        else
+//        {
+//            // c= percentage_change(-get_ratio);
+//            c= percentage_change(-get_ratio);
+//             Turn_Right(c);
+//             //Turn_Right(get_ratio);
+//        }
+//       // Turn_Left(1000-(get_ratio*10));
+//         SysCtlDelay(SysCtlClockGet() / 12);
+//       // Turn_Right(set__point);
+////          c =percentage_change(set__point);
+////        Turn_Right(c);
+     }
 }
 uint16_t change(uint16_t input)
 {
@@ -96,38 +105,45 @@ uint16_t percentage_change(uint8_t input)
 
 extern  void task_t(void)
 {
-// sensor_Reading = ecoder_read();
- //control_action = pid_loop(set__point ,sensor_Reading);
-// UARTprintf("%d \n",sensor_Reading);
-// if(control_action >0)
-// {
-//     motor_stop();
-//      Turn_Left( (1000- control_action)  );
-// }
-// else
-// {
-//     motor_stop();
-//     control_action = -control_action;
-//      Turn_Right(  (1000-  control_action) *13  );
-// }
-     if(get_ratio >0)
-     {
-          motor_stop();
-          Turn_Left( (1000- control_action)  );
-     }
-     else
-     {
-         motor_stop();
-         control_action = -control_action;
-          Turn_Right(  (1000-  control_action) *13  );
-     }
+ sensor_Reading = ecoder_read();
+ control_action = pid_loop(set__point ,sensor_Reading);
+ UARTprintf("%d \n",sensor_Reading);
+
+ if(control_action >0)
+ {
+      motor_stop();
+      c= percentage_change(control_action);
+      Turn_Left(c);
+
+ }
+ else
+ {
+     motor_stop();
+    // control_action = -control_action;
+     c= percentage_change(-control_action);
+    Turn_Right(c);
+
+ }
+ //        if(get_ratio >0)
+ //        {
+ //
+ //           c= percentage_change(get_ratio);
+ //            Turn_Left(c);
+ //        }
+ //        else
+ //        {
+ //            // c= percentage_change(-get_ratio);
+ //            c= percentage_change(-get_ratio);
+ //             Turn_Right(c);
+ //             //Turn_Right(get_ratio);
+ //        }
 
 }
 
 
 extern void task_set_point_change(void)
 {
-    set__point =set__point +10;
-    control_action = control_action +100;
+    set__point =set__point -100;
+  //control_action = control_action +100;
 }
 

@@ -27,6 +27,7 @@
 #define RIGHT_BUTTON            GPIO_PIN_0
 #define ALL_BUTTONS             (LEFT_BUTTON)
 
+extern volatile uint8_t stop_flag;
  uint8_t g_ui8ButtonStates = ALL_BUTTONS;
  extern void task_set_point_change(void);
  volatile uint8_t right =0;
@@ -63,6 +64,8 @@ extern void buttons_handler(void)
     {
         right =1 ;
     }
+    stop_flag =1;
+
 }
 
 

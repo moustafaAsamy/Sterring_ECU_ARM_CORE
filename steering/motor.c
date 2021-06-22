@@ -37,8 +37,8 @@ void motor_init(void)
 
 void Turn_Right(uint16_t control)
 {
-//    GPIOPinWrite(GPIO_PORTD_BASE, GPIO_PIN_7, GPIO_PIN_7);
-//    GPIOPinWrite(GPIO_PORTE_BASE, GPIO_PIN_3, GPIO_PIN_3);
+    GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_4, GPIO_PIN_4);
+    GPIOPinWrite(GPIO_PORTE_BASE, GPIO_PIN_2, GPIO_PIN_2);
     TimerMatchSet(TIMER2_BASE, TIMER_A,  15990);
     TimerDisable(TIMER2_BASE, TIMER_A);
     TimerMatchSet(TIMER2_BASE, TIMER_B,  control);
@@ -47,8 +47,8 @@ void Turn_Right(uint16_t control)
 
 void Turn_Left(uint16_t control )
 {
-//    GPIOPinWrite(GPIO_PORTD_BASE, GPIO_PIN_7, GPIO_PIN_7);
-//    GPIOPinWrite(GPIO_PORTE_BASE, GPIO_PIN_3, GPIO_PIN_3);
+    GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_4, GPIO_PIN_4);
+    GPIOPinWrite(GPIO_PORTE_BASE, GPIO_PIN_2, GPIO_PIN_2);
     TimerMatchSet(TIMER2_BASE, TIMER_B,  15990);
     TimerDisable(TIMER2_BASE, TIMER_B);
     TimerMatchSet(TIMER2_BASE, TIMER_A,   control);
@@ -57,9 +57,11 @@ void Turn_Left(uint16_t control )
 
 void motor_stop(void)
 {
-
+    TimerDisable(TIMER2_BASE, TIMER_B);
+       TimerDisable(TIMER2_BASE, TIMER_A);
     GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_4, 0);
     GPIOPinWrite(GPIO_PORTE_BASE, GPIO_PIN_2, 0);
+
 //    TimerDisable(TIMER2_BASE, TIMER_B);
 //    TimerDisable(TIMER2_BASE, TIMER_A);
 

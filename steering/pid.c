@@ -9,8 +9,8 @@
 #include "stdint.h"
 
 /* constants for PID */
-const float Kp = 6;
-const float Ki = 0.051;
+const float Kp =4.2;
+const float Ki = 0.0005;//0.001;
 const float Kd = 0.5;
 const int Set_Point = 353;
 
@@ -32,8 +32,8 @@ uint32_t Maincontroller(int32_t target, int32_t current)
     // because decimals are inacurate and even small changes from rounding could be a problem
     target = target ;
     current = current ;
-    int32_t i_Max = 10000 ;
-    int32_t i_Min = 0;
+    int32_t i_Max =  10000 ;
+    int32_t i_Min = -10000;
 
 //    float Kp = 0.7;
 //    float Ki = 0.01;
@@ -94,9 +94,9 @@ derivative =error - last_error ;
 int pwm =(Kp*error) + (Ki*integral) + (Kd*derivative);
 
 
-if(pwm >990)
-{pwm =990;}
-else if (pwm <-990) {pwm =-990;}
+if(pwm >99)
+{pwm =99;}
+else if (pwm <-99) {pwm =-99;}
 
 last_error =error ;
 return pwm ;
