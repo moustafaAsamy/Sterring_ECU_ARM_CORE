@@ -1,0 +1,41 @@
+/*
+ * application.c
+ *
+ *  Created on: Jun 23, 2021
+ *      Author: Lenovo PC
+ */
+
+
+
+
+void UDP_recv_steering_set_point(void *arg, struct udp_pcb *pcb, struct pbuf *p,ip_addr_t *addr, u16_t port)
+{
+    led_off();
+#if ECU1
+    led_on(red);
+#endif
+#if ECU2
+    led_on(blue);
+#endif
+    memcpy( set_point_buffer  , (u8_t *)p->payload,   p->len);
+    set_point_buffer[0]=p->len;
+    pbuf_free(p);           // Free the memory space allocated for this receive.
+    p =NULL;                // to avoid dangling pointer
+    connection_established =1;
+}
+
+void UDP_recv_steering_encoder_reading(void *arg, struct udp_pcb *pcb, struct pbuf *p,ip_addr_t *addr, u16_t port)
+{
+    led_off();
+#if ECU1
+    led_on(red);
+#endif
+#if ECU2
+    led_on(blue);
+#endif
+    memcpy( encoder_reading_buffer  , (u8_t *)p->payload,   p->len);
+    encoder_reading_buffer[0]=p->len;
+    pbuf_free(p);           // Free the memory space allocated for this receive.
+    p =NULL;                // to avoid dangling pointer
+    connection_established =1;
+}

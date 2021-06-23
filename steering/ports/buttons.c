@@ -55,16 +55,16 @@ extern void buttons_handler(void)
     MAP_GPIOPinWrite(GPIO_PORTF_BASE,8, 8);
    // TcpIp_Close(0, 0);
     led_on(green);
-    task_set_point_change();
-    if (right ==1)
-        {
-        right =0;
-        }
-    else
-    {
-        right =1 ;
-    }
-    stop_flag =1;
+//    task_set_point_change();
+//    if (right ==1)
+//        {
+//        right =0;
+//        }
+//    else
+//    {
+//        right =1 ;
+//    }
+//    stop_flag =1;
 
 }
 

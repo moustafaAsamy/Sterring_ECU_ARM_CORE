@@ -1,0 +1,71 @@
+
+
+#include "motor.h"
+#include "pid.h"
+#include "encoder.h"
+#include "stdint.h"
+#include "ADC.h"
+#include "driverlib/sysctl.h"
+void InitConsole(void);
+extern void UARTprintf(const char *pcString, ...);
+extern int  pid_loop(int target , int current_postion );
+uint8_t encoder_reading_buffer[100]={0} ;
+uint8_t set_point_buffer[10] ={0};
+extern void  timer_start(void);
+int sensor_Reading =0;
+int control_action =0;
+volatile int set__point =0;
+volatile int get_ratio = 0;
+extern void ButtonsInit(void);
+void led_init(void);
+uint16_t percentage_change(uint8_t input);
+uint16_t change(uint16_t input);
+volatile uint8_t stop_flag =0;
+int c =0;
+int main()
+{
+    //SysCtlClockSet(SYSCTL_SYSDIV_10 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |  SYSCTL_XTAL_16MHZ); // must be used for adc
+    ButtonsInit();
+    led_init();
+    ecoder_init();
+    motor_init();
+    InitConsole();
+    //ADC_INIT();
+    uint32_t i =0;
+    for(i =0;i<65000;i++)
+    {
+
+    }
+    set__point =400;
+    timer_start();
+    while(1)
+    {
+
+    }
+}
+
+
+extern  void task_t(void)
+{
+ sensor_Reading = ecoder_read();
+ control_action = pid_loop(set__point ,sensor_Reading);
+ UARTprintf("%d \n",sensor_Reading);
+ if(control_action >0)
+ {
+      motor_stop();
+      c= percentage_change(control_action);
+      Turn_Left(c);
+ }
+ else
+ {
+     motor_stop();
+     c= percentage_change(-control_action);
+     Turn_Right(c);
+ }
+}
+
+extern void task_set_point_change(void)
+{
+   set__point =set__point -100;
+}
+

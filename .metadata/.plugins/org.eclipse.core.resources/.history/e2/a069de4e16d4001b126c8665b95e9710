@@ -1,0 +1,30 @@
+/*
+ * application.h
+ *
+ *  Created on: Jun 23, 2021
+ *      Author: Lenovo PC
+ */
+
+#ifndef APPLICATION_H_
+#define APPLICATION_H_
+
+
+ip_addr_t ip_addr =         { 0xc0a8017b};
+ip_addr_t Remote_ip_addr =  { 0xc0a8016a} ;
+ip_addr_t net_mask =        { 0xc0a80000} ;
+ip_addr_t gw_addr  =        { 0xc0a82526} ;
+
+
+u16_t port_local_steering_set_point          = 9001 ;
+u16_t port_local_steering_encoder_reading    = 9002 ;
+u16_t port_remote_steering_set_point         = 9801;
+u16_t port_remote_steering_encoder_reading   = 9802;
+
+
+struct udp_pcb * Udp_ptr_steering_set_point  ;
+struct udp_pcb * Udp_ptr_steering_encoder_reading  ;
+
+extern  struct netif g_sNetIF;
+
+
+#endif /* APPLICATION_H_ */

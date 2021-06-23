@@ -377,10 +377,10 @@ void ECU_int(struct netif *netif, uint8_t controller_id ,  ip_addr_t *ipaddr, ip
 {
         gpio_comm_init();
         spi_init();
-        //ButtonsInit();
+        ButtonsInit();
         enc_init(mac);
         led_on(yellow);
-        timer_start();
+        //timer_start();
         //netif->ctr_ID =controller_id;
         netif->hwaddr[0] = mac[0];
         netif->hwaddr[1] = mac[1];
@@ -405,37 +405,7 @@ void SimpleDelay_2(void)
 
 
 
-void UDP_recv_set_point(void *arg, struct udp_pcb *pcb, struct pbuf *p,ip_addr_t *addr, u16_t port)
-{
-    led_off();
-#if ECU1
-    led_on(red);
-#endif
-#if ECU2
-    led_on(blue);
-#endif
-    memcpy( set_point_buffer  , (u8_t *)p->payload,   p->len);
-    set_point_buffer[0]=p->len;
-    pbuf_free(p);           // Free the memory space allocated for this receive.
-    p =NULL;                // to avoid dangling pointer
-    connection_established =1;
-}
 
-void UDP_recv_encoder_reading(void *arg, struct udp_pcb *pcb, struct pbuf *p,ip_addr_t *addr, u16_t port)
-{
-    led_off();
-#if ECU1
-    led_on(red);
-#endif
-#if ECU2
-    led_on(blue);
-#endif
-    memcpy( encoder_reading_buffer  , (u8_t *)p->payload,   p->len);
-    encoder_reading_buffer[0]=p->len;
-    pbuf_free(p);           // Free the memory space allocated for this receive.
-    p =NULL;                // to avoid dangling pointer
-    connection_established =1;
-}
 
 
 
@@ -491,45 +461,5 @@ InitConsole(void)
 //
 //}
 
-void send_udp_encoder_reading(const uint8_t* data, int length)
-{
-    //if (connection_established ==1)
-    //{
-         struct pbuf *p;
-         if (   (p= pbuf_alloc(PBUF_udp, length,PBUF_RAM) )== NULL) { return ERR_MEM;}  /* not enough space */           // Length of data only and payload point to the start of data
-         //static int c =5;
-         memset(data,0xaa,1);
-         memset(data+1,0xbb,1);
-         memset(data+2,0xcc,1);
-         memset(data+3,0xdd,1);
-         //uint32_t x = 0xffaabbcc;
-         memcpy(p->payload,(u8_t*)data ,length);
-         err_t n= udp_send(Udp_ptr_encoder_reading, p);
-         pbuf_free(p);
-  //  }
 
-}
 
-void send_udp_set_point(const uint8_t* data, int length)
-{
-    //if (connection_established ==1)
-    //{
-         struct pbuf *p;
-         if (   (p= pbuf_alloc(PBUF_udp, length,PBUF_RAM) )== NULL) { return ERR_MEM;}  /* not enough space */           // Length of data only and payload point to the start of data
-         //static int c =5;
-         memset(data,0xaa,1);
-         memset(data+1,0xbb,1);
-         memset(data+2,0xcc,1);
-         memset(data+3,0xdd,1);
-         //uint32_t x = 0xffaabbcc;
-         memcpy(p->payload,(u8_t*)data ,length);
-         err_t n= udp_send(Udp_ptr_Set_point, p);
-         pbuf_free(p);
-  //  }
-
-}
-
-void inti(void)
-{
-
-}

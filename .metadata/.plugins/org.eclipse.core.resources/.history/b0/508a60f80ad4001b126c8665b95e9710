@@ -1,0 +1,89 @@
+#include "motor.h"
+#include "pid.h"
+#include "encoder.h"
+#include "stdint.h"
+#include "ADC.h"
+#include "driverlib/sysctl.h"
+#include "ports/config.h"
+#include "interface/lwip_int.h"
+#include "\interface\lwip_int.h"
+
+
+
+ip_addr_t ip_addr =         { 0xc0a8017b};
+ip_addr_t Remote_ip_addr =  { 0xc0a8016a} ;
+ip_addr_t net_mask =        { 0xc0a80000} ;
+ip_addr_t gw_addr  =        { 0xc0a82526} ;
+
+
+u16_t port_local_steering_set_point          = 9001 ;
+u16_t port_local_steering_encoder_reading    = 9002 ;
+u16_t port_remote_steering_set_point         = 9801;
+u16_t port_remote_steering_encoder_reading   = 9802;
+
+extern  struct netif g_sNetIF;
+extern  struct udp_pcb * Udp_ptr  ;
+extern  uint8_t buffer[100];
+
+int c =0;
+int main()
+{
+
+
+    ecoder_init();
+    motor_init();
+
+    Remote_ip_addr.addr=htonl(Remote_ip_addr.addr);
+    ECU_int(&g_sNetIF, 0 ,  &ip_addr, &net_mask, &gw_addr);
+
+    uint32_t i =0;
+    for(i =0;i<65000;i++)
+    {
+
+    }
+
+    timer_start();
+    while(1)
+    {
+
+    }
+}
+
+#if ECU2
+
+
+
+
+;
+
+extern struct udp_pcb * Udp_ptr  ;
+extern uint8_t buffer[100];
+u16_t port_1 =9007 ;
+u16_t port_remote =9807;
+
+
+
+
+
+
+int main()
+{
+    ip_addr.addr = 0xc0a8017b;
+    //ip_addr.addr = 0xc0a80172;remote
+    Remote_ip_addr.addr=htonl(Remote_ip_addr.addr);
+    ECU_int(&g_sNetIF, 0 ,  &ip_addr, &net_mask, &gw_addr);
+    memset(buffer,8,100);
+    Udp_ptr = udp_new();
+    err_t result1 =  udp_bind(Udp_ptr , &ip_addr ,port_1);
+    err_t result2 =  udp_connect(Udp_ptr, &Remote_ip_addr,port_remote);
+    Udp_ptr->recv = UDP_recv;
+
+    while(1)
+    {
+
+    }
+}
+#endif
+
+
+

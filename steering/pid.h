@@ -1,4 +1,4 @@
 
 #include "stdint.h"
 
-uint32_t Maincontroller(int32_t target, int32_t current);
+extern int  pid_loop(int target , int current_postion );
